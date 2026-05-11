@@ -1,0 +1,85 @@
+#include <iostream>
+using namespace std;
+
+class BaseArray {
+
+private:
+	int capacity; // 동적 할당된 메모리 용량
+	int* mem;
+protected:
+	BaseArray(int capacity = 1000) {
+		this->capacity = capacity; 
+		mem = new int[capacity];
+	}
+	~BaseArray() { delete[] mem; }
+	void put(int index, int val) { mem[index] = val; }
+	int get(int index) { return mem[index]; }
+	int getCapacity() { return capacity; }
+};
+
+class Mystack : public BaseArray {
+
+private:
+	int tos;
+
+public:
+	Mystack(int capacity);
+	void push(int add);
+	int pop();
+	int capacity();
+	int length();
+};
+
+Mystack::Mystack(int capacity): BaseArray(capacity)
+{	
+	tos = 0;
+}
+
+int Mystack::capacity()
+{	return getCapacity();
+}
+int Mystack::length()
+{	return tos;
+}
+
+
+void Mystack::push(int add)
+{ 
+	if (tos == capacity()) {
+		return;
+	} put(tos++, add);
+}
+
+int Mystack::pop()
+{
+	if (tos == 0) {
+		return -1;
+	} 
+	return get(--tos);
+}
+
+
+
+
+
+
+
+int main() {
+	Mystack mQ(1000);
+	int n;
+	cout << "큐에 삽입할 5개의 정수를 입력하라>> ";
+	for (int i = 0; i < 5; i++) {
+		cin >> n;
+		mQ.push(n); // 큐에 삽입
+	}
+	mQ.push(1000);
+	mQ.push(2000);
+	cout << mQ.pop() << '\n';
+	cout << "큐의 용량:" << mQ.capacity() << ", 큐의 크기:" << mQ.length() <<
+		endl;
+	cout << "큐의 원소를 순서대로 제거하여 출력한다>> ";
+	while (mQ.length() != 0) {
+		cout << mQ.pop() << ' '; // 큐에서 제거하여 출력
+	}
+	cout << endl << "큐의 현재 크기 : " << mQ.length() << endl;
+}
