@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class BP {
+	string model;
+	string menu;
+	int printedcount;
+	int availableCount;
+
+public: 
+	BP(string model, string menu, int totalPapers);
+protected:
+	bool print(int page);
+	string getModel();
+	string getMenu();
+	int getPC();
+	int getAC();
+	void show();
+};
+
+
+BP::BP(string model, string menu, int totalPapers)
+{
+	this->model = model;
+	this->menu = menu;
+	this->availableCount = totalPapers;
+	this->printedcount = 0;
+
+}
+
+bool BP::print(int page)
+{
+	if (availableCount < page) {
+		cout << "용지 부족" << endl;
+		return false;
+	}
+	printedcount += page;
+	availableCount -= page;
+	return true;
+}
+
+string BP::getModel()
+{
+	return model;
+}
+
+
+string BP::getMenu()
+{
+	return menu;
+}
+
+int BP::getPC()
+{
+	return printedcount;
+}
+
+int BP::getAC()
+{
+	return availableCount;
+}
+
+void BP::show()
+{	cout << m
+}
+
+
+
+
+int main() {
+
+
+
+
+
+
+}
+
